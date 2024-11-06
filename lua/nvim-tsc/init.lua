@@ -221,13 +221,11 @@ M.start = function(task)
 
     task.on_start(task)
     config.on_start(task)
-
-    return t
 end
 
 M.stop = function(task)
     if not task.started then
-        return task
+        return
     end
 
     task.running = false
@@ -256,7 +254,7 @@ M.flush = function()
     if task.queue and not task.started and not task.running and not task.ended then
         M.start(task)
     else
-        return M.flush()
+        M.flush()
     end
 end
 
